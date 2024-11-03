@@ -3,6 +3,8 @@
 
 ## Задание:
 
+sudo apt install libaa-bin
+
 1. Запуск aafire в контейнере:
 
 a. Создание Dockerfile:
