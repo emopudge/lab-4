@@ -19,7 +19,7 @@ b. Построение образа:
 
 Bash
 
-docker build -t aafire-container . 
+sudo docker build . -t aafire-container . 
 
 c. Запуск контейнера:
 
