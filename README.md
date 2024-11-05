@@ -4,7 +4,11 @@
 ## Задание:
 
 sudo apt install libaa-bin
-
+sudo apt-get update && apt-get install -y aafire ping
+sudo apt-get install -y inetutils-ping
+ping -c 4 google.com
+sudo docker ps -a - посмотреть все созданные контейнеры
+sudo docker images - посмотреть все образы в докер
 1. Запуск aafire в контейнере:
 
 a. Создание Dockerfile:
@@ -13,7 +17,7 @@ dockerfile
 
 FROM ubuntu:latest
 
-RUN apt-get update && apt-get install -y aafire ping
+RUN apt-get update && sudo apt-get install -y inetutils-ping
 
 CMD ["aafire"]
 
@@ -21,7 +25,7 @@ b. Построение образа:
 
 Bash
 
-sudo docker build . -t aafire-container . 
+sudo docker build . -t aafire 
 
 c. Запуск контейнера:
 
