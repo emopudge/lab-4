@@ -67,7 +67,6 @@
 
    Подключаем оба контейнера к только что созданной сети:
 ```bash
-   bash
    docker network connect myNetwork my-aafire-1
    docker network connect myNetwork my-aafire-2
   ``` 
@@ -75,7 +74,6 @@
 
    Открываем новое окно терминала и проверяем соединение между контейнерами с помощью утилиты ping:
 ```bash
-   bash
    docker exec -it my-aafire-1 ping my-aafire-2
  ```  
    **Скриншот тестирования соединения:**
