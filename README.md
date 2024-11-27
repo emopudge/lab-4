@@ -15,11 +15,7 @@
 
 ## Шаги выполнения:
 
-1. **Установка библиотеки libaa-bin**
-   ```bash
-   sudo apt install libaa-bin
-   ```
-2. **Созлание dockerfile**
+1. **Созлание dockerfile**
    ```bash
    FROM ubuntu:latest
 
@@ -28,18 +24,18 @@
    CMD ["aafire"]
 
    ```
-3. **Построение образа (image)**
+2. **Построение образа (image)**
    ```bash
    sudo docker build . -t my-aafire 
    ```
-4. **Создание контейнеров**
+3. **Создание контейнеров**
    ```
    sudo docker run -it --name my-aafire-1 my-aafire
    sudo docker run -it --name my-aafire-2 my-aafire
    ```
    ![image](https://github.com/user-attachments/assets/00e0e1b6-0e5d-45f2-8a08-9f50552babaf)
 
-4.5. **Повторный запуск контейнеров с этими именами**
+3.5. **Повторный запуск контейнеров с этими именами**
    ```
    sudo docker start my-aafire-1
    ```
@@ -47,18 +43,18 @@
    ```
    sudo docker exec -it my-aafire-1 aafire
    ```
-5. **Создание сети между контейнерами**
+4. **Создание сети между контейнерами**
 ```bash
    docker network create myNetwork
 ```   
-6. **Подключение контейнеров к созданной сети**
+5. **Подключение контейнеров к созданной сети**
 
    Подключаем оба контейнера к только что созданной сети:
 ```bash
    docker network connect myNetwork my-aafire-1
    docker network connect myNetwork my-aafire-2
   ``` 
-7. **Тестирование соединения между контейнерами**
+6. **Тестирование соединения между контейнерами**
 
    Открываем новое окно терминала и проверяем соединение между контейнерами с помощью утилиты ping:
 ```bash
