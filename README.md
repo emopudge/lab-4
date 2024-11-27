@@ -1,85 +1,3 @@
-# Лабораторная работа 4
-## Цель 
-
-## Задание:
-
-sudo apt install libaa-bin
-
-
-sudo docker ps -a - посмотреть все созданные контейнеры
-sudo docker images - посмотреть все образы в докер
-
-1. Запуск aafire в контейнере:
-
-a. Создание Dockerfile:
-
-dockerfile
-
-FROM ubuntu:latest
-
-RUN apt-get update && sudo apt-get install -y inetutils-ping
-
-CMD ["aafire"]
-
-b. Построение образа:
-
-Bash
-
-sudo docker build . -t aafire 
-
-c. Запуск контейнера:
-
-Bash
-
-docker run -d -it aafire-container
-
-d. Скриншот:
-
-!aafire-container
-
-2. Настройка сети между двумя контейнерами:
-
-a. Создание сети:
-
-Bash
-
-docker network create myNetwork
-
-b. Запуск двух контейнеров:
-
-Bash
-
-docker run -d -it --network myNetwork aafire-container 
-docker run -d -it --network myNetwork aafire-container
-
-c. Получение ID контейнеров:
-
-Bash
-
-docker ps
-
-d. Подключение контейнеров к сети:
-
-Bash
-
-docker network connect myNetwork <container_id_1>
-docker network connect myNetwork <container_id_2>
-
-e. Проверка настроек сети:
-
-Bash
-
-docker network inspect myNetwork
-
-f. Тестирование соединения:
-
-Bash
-
-docker exec -it <container_id_1> ping <container_id_2>
-
-g. Скриншот:
-
-!ping-containers
 
 Объяснения:
 
@@ -112,9 +30,9 @@ g. Скриншот:
 ## Шаги выполнения:
 
 1. **Установка библиотеки libaa-bin**
-```bash
-sudo apt install libaa-bin
-```
+   ```bash
+   sudo apt install libaa-bin
+   ```
 2. **Созлание dockerfile**
    ```bash
    FROM ubuntu:latest
@@ -124,41 +42,41 @@ sudo apt install libaa-bin
    CMD ["aafire"]
 
    ```
-3. **Построение образа**
+3. **Построение образа (image)**
    ```bash
-   
+   sudo docker build . -t my-aafire 
+   ```
+4. **Создание контейнеров**
+   ```
+   sudo docker run -it --name my-aafire-1 my-aafire
+   sudo docker run -it --name my-aafire-2 my-aafire
+   ```
+4.5. **Повторный запуск контейнеров с этими именами**
+   ```
+   sudo docker start my-aafire-1
+   ```
+или
+   ```
+   sudo docker exec -it my-aafire-1 aafire
    ```
 5. **Создание сети между контейнерами**
-
-   Затем создаём сеть с именем "myNetwork":
 ```bash
-   bash
    docker network create myNetwork
 ```   
-4. **Подключение контейнеров к созданной сети**
+6. **Подключение контейнеров к созданной сети**
 
    Подключаем оба контейнера к только что созданной сети:
 ```bash
    bash
-   docker network connect myNetwork mycontainer1
-   docker network connect myNetwork mycontainer2
+   docker network connect myNetwork my-aafire-1
+   docker network connect myNetwork my-aafire-2
   ``` 
-5. **Проверка настроек сети**
-
-   Для проверки настроек сети выполняем команду:
-```bash
-   bash
-   docker network inspect myNetwork
-```   
-   Это позволит увидеть, что оба контейнера подключены к сети.
-
-6. **Тестирование соединения между контейнерами**
+7. **Тестирование соединения между контейнерами**
 
    Открываем новое окно терминала и проверяем соединение между контейнерами с помощью утилиты ping:
 ```bash
    bash
-   docker exec -it mycontainer1 ping mycontainer2
+   docker exec -it my-aafire-1 ping my-aafire-2
  ```  
    **Скриншот тестирования соединения:**
    
-   ![Скриншот тестирования соединения](ссылка_на_скриншот)
