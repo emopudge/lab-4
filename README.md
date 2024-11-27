@@ -1,18 +1,4 @@
 
-Объяснения:
-
- Dockerfile: В этом файле мы используем образ Ubuntu, устанавливаем приложение `aafire` и утилиту `ping` и запускаем `aafire` как команду.
- docker build: Строим образ Docker с именем aafire-container из Dockerfile.
- docker run: Запускаем контейнер в фоновом режиме (`-d`) с интерактивной оболочкой (`-it`) и подключаем его к сети `myNetwork`.
- docker network create: Создаем новую сеть с именем myNetwork.
- docker ps: Получаем список запущенных контейнеров.
- docker network connect: Подключаем контейнеры к сети myNetwork.
- docker network inspect: Проверяем настройки сети.
- docker exec: Запускаем команду ping в контейнере container_id_1, чтобы проверить соединение с контейнером container_id_2.
-
-Результат:
-
-Теперь два контейнера подключены к общей сети myNetwork, и вы можете проверить соединение между ними с помощью ping.
 
 
 
@@ -51,6 +37,8 @@
    sudo docker run -it --name my-aafire-1 my-aafire
    sudo docker run -it --name my-aafire-2 my-aafire
    ```
+   ![image](https://github.com/user-attachments/assets/00e0e1b6-0e5d-45f2-8a08-9f50552babaf)
+
 4.5. **Повторный запуск контейнеров с этими именами**
    ```
    sudo docker start my-aafire-1
@@ -76,5 +64,5 @@
 ```bash
    docker exec -it my-aafire-1 ping my-aafire-2
  ```  
-   **Скриншот тестирования соединения:**
+![image](https://github.com/user-attachments/assets/de3c7604-51b6-49aa-8287-9500cdfa2a5d)
    
