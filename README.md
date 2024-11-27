@@ -4,11 +4,11 @@
 ## Задание:
 
 sudo apt install libaa-bin
-sudo apt-get update && apt-get install -y aafire ping
-sudo apt-get install -y inetutils-ping
-ping -c 4 google.com
+
+
 sudo docker ps -a - посмотреть все созданные контейнеры
 sudo docker images - посмотреть все образы в докер
+
 1. Запуск aafire в контейнере:
 
 a. Создание Dockerfile:
@@ -111,44 +111,34 @@ g. Скриншот:
 
 ## Шаги выполнения:
 
-1. **Запуск приложения "aafire" в контейнерах**
-
-   Сначала мы создаём и запускаем два контейнера с приложением "aafire". Для этого выполняются команды:
+1. **Установка библиотеки libaa-bin**
+```markdown
+sudo apt install libaa-bin
 ```
-   bash
-   docker run -d --name mycontainer1 aafire
-   docker run -d --name mycontainer2 aafire
-```
-   При выполнении этих команд приложение будет запущено в фоновом режиме.
+2. **Созлание dockerfile**
+   ```markdown
+   FROM ubuntu:latest
 
-   **Скриншот работы контейнеров:**
+   RUN apt-get update && apt-get install -y libaa-bin inetutils-ping && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+   CMD ["aafire"]
+
+   ```
+3. **Построение образа**
+   ```markdown
    
-   ![Скриншот работы контейнеров](ссылка_на_скриншот)
-
-2. **Установка утилиты ping**
-
-   Поскольку в контейнерах отсутствует утилита ping, необходимо установить её. Заходим в каждый из контейнеров и устанавливаем нужный пакет. Например, для Alpine Linux используем:
-```
-   bash
-   docker exec -it mycontainer1 sh
-   apk add --no-cache iputils
-   exit
-
-   docker exec -it mycontainer2 sh
-   apk add --no-cache iputils
-   exit
-```   
-3. **Создание сети между контейнерами**
+   ```
+5. **Создание сети между контейнерами**
 
    Затем создаём сеть с именем "myNetwork":
-```
+```markdown
    bash
    docker network create myNetwork
 ```   
 4. **Подключение контейнеров к созданной сети**
 
    Подключаем оба контейнера к только что созданной сети:
-```
+```markdown
    bash
    docker network connect myNetwork mycontainer1
    docker network connect myNetwork mycontainer2
@@ -156,7 +146,7 @@ g. Скриншот:
 5. **Проверка настроек сети**
 
    Для проверки настроек сети выполняем команду:
-```
+```markdown
    bash
    docker network inspect myNetwork
 ```   
@@ -165,7 +155,7 @@ g. Скриншот:
 6. **Тестирование соединения между контейнерами**
 
    Открываем новое окно терминала и проверяем соединение между контейнерами с помощью утилиты ping:
-```
+```markdown
    bash
    docker exec -it mycontainer1 ping mycontainer2
  ```  
