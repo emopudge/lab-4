@@ -112,11 +112,11 @@ g. Скриншот:
 ## Шаги выполнения:
 
 1. **Установка библиотеки libaa-bin**
-```markdown
+```bash
 sudo apt install libaa-bin
 ```
 2. **Созлание dockerfile**
-   ```markdown
+   ```bash
    FROM ubuntu:latest
 
    RUN apt-get update && apt-get install -y libaa-bin inetutils-ping && apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -125,20 +125,20 @@ sudo apt install libaa-bin
 
    ```
 3. **Построение образа**
-   ```markdown
+   ```bash
    
    ```
 5. **Создание сети между контейнерами**
 
    Затем создаём сеть с именем "myNetwork":
-```markdown
+```bash
    bash
    docker network create myNetwork
 ```   
 4. **Подключение контейнеров к созданной сети**
 
    Подключаем оба контейнера к только что созданной сети:
-```markdown
+```bash
    bash
    docker network connect myNetwork mycontainer1
    docker network connect myNetwork mycontainer2
@@ -146,7 +146,7 @@ sudo apt install libaa-bin
 5. **Проверка настроек сети**
 
    Для проверки настроек сети выполняем команду:
-```markdown
+```bash
    bash
    docker network inspect myNetwork
 ```   
@@ -155,7 +155,7 @@ sudo apt install libaa-bin
 6. **Тестирование соединения между контейнерами**
 
    Открываем новое окно терминала и проверяем соединение между контейнерами с помощью утилиты ping:
-```markdown
+```bash
    bash
    docker exec -it mycontainer1 ping mycontainer2
  ```  
