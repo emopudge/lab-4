@@ -55,7 +55,7 @@
    ```
    sudo docker start my-aafire-1
    ```
-или
+затем, если хотим увидеть огонь:
    ```
    sudo docker exec -it my-aafire-1 aafire
    ```
